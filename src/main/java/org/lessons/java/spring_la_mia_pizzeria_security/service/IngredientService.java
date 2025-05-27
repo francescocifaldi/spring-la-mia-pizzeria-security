@@ -1,9 +1,10 @@
-package org.lessons.java.spring_la_mia_pizzeria_webapi.service;
+package org.lessons.java.spring_la_mia_pizzeria_security.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.lessons.java.spring_la_mia_pizzeria_webapi.model.Ingredient;
-import org.lessons.java.spring_la_mia_pizzeria_webapi.repository.IngredientRepository;
+
+import org.lessons.java.spring_la_mia_pizzeria_security.model.Ingredient;
+import org.lessons.java.spring_la_mia_pizzeria_security.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

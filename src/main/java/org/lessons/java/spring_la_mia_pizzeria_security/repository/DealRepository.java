@@ -1,6 +1,6 @@
-package org.lessons.java.spring_la_mia_pizzeria_webapi.repository;
+package org.lessons.java.spring_la_mia_pizzeria_security.repository;
 
-import org.lessons.java.spring_la_mia_pizzeria_webapi.model.Deal;
+import org.lessons.java.spring_la_mia_pizzeria_security.model.Deal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DealRepository extends JpaRepository<Deal, Integer> {

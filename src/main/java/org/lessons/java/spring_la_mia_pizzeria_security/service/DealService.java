@@ -1,9 +1,9 @@
-package org.lessons.java.spring_la_mia_pizzeria_webapi.service;
+package org.lessons.java.spring_la_mia_pizzeria_security.service;
 
 import java.util.Optional;
 
-import org.lessons.java.spring_la_mia_pizzeria_webapi.model.Deal;
-import org.lessons.java.spring_la_mia_pizzeria_webapi.repository.DealRepository;
+import org.lessons.java.spring_la_mia_pizzeria_security.model.Deal;
+import org.lessons.java.spring_la_mia_pizzeria_security.repository.DealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

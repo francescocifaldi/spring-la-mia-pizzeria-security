@@ -1,10 +1,10 @@
-package org.lessons.java.spring_la_mia_pizzeria_webapi.controller;
+package org.lessons.java.spring_la_mia_pizzeria_security.controller;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.lessons.java.spring_la_mia_pizzeria_webapi.model.Pizza;
-import org.lessons.java.spring_la_mia_pizzeria_webapi.service.PizzaService;
+import org.lessons.java.spring_la_mia_pizzeria_security.model.Pizza;
+import org.lessons.java.spring_la_mia_pizzeria_security.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package org.lessons.java.spring_la_mia_pizzeria_webapi.model;
+package org.lessons.java.spring_la_mia_pizzeria_security.model;
 
 import java.util.List;
 

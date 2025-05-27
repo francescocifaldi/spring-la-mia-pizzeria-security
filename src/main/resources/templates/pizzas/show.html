@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+<th:block th:replace="~{fragments :: custom-navbar}"></th:block>
+
+<body>
+    <section class="pizza-details mb-2">
+        <div class="container">
+            <h1 class="text-center"> [[${pizza.name}]]</h1>
+            <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-primary w-50" title="Modifica">
+                    Modifica
+                </a>
+                <button type="button" class="btn btn-danger w-50" data-bs-toggle="modal" data-bs-target="#modal"
+                    title="Elimina">
+                    Elimina
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Elimino pizza [[${pizza.name}]]</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Sei sicuro?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                <form th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger">
+                                        Elimina
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center">
+                    <img th:src="@{${pizza.photo} != null ? '/imgs/' + ${pizza.photo} : '/imgs/placeholder.png'}"
+                        class="card-img-top" alt="..." />
+                </div>
+                <div class="col-6">
+                    <p th:text="${pizza.description}"></p>
+                    <p>Prezzo: €[[${pizza.price}]]</p>
+                    <p>Ingredienti:</p>
+                    <div>
+                        <th:block th:each="ingredient : ${pizza.ingredients}">
+                            <span class="badge bg-secondary" th:text="${ingredient.name}"></span>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pizza-deals">
+        <div class="container mb-2">
+            <a th:href="@{/pizzas/{id}/deals(id=${pizza.id})}" class="btn btn-outline-danger w-100 px-0">Crea
+                Offerta</a>
+        </div>
+        <div class="container" th:if="${!pizza.deals.isEmpty()}">
+            <h4>Offerte disponibili:</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data inizio</th>
+                        <th>Data fine</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="deal : ${pizza.deals}" th:object="${deal}">
+                        <tr>
+                            <td th:text="*{title}"></td>
+                            <td th:text="*{startDate}"></td>
+                            <td th:text="*{endDate}"></td>
+                            <td class="text-end">
+                                <a th:href="@{/deals/edit/{id}(id=${deal.id})}" class="btn btn-primary btn-sm"
+                                    title="Modifica offerta"><i class="fa-solid fa-pen-to-square"></i></a>
+
+                                <button type="submit" class="btn btn-danger btn-sm" title="Elimina offerta"
+                                    data-bs-toggle="modal" data-bs-target="#deal-modal">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deal-modal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Elimino offerta [[${deal.title}]]</h5>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Sei sicuro?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Annulla</button>
+                                                <form th:action="@{/deals/delete/{id}(id=${deal.id})}" method="post">
+                                                    <button type="submit" class="btn btn-danger">
+                                                        Elimina
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+        <div class="container" th:if="${pizza.deals.isEmpty()}">
+            <div class="alert alert-info h-100" role="alert">
+                <i>Non ci sono offerte disponibili per la pizza selezionata</i>
+            </div>
+    </section>
+</body>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+
+</html>

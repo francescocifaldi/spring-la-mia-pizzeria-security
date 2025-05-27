@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:fragment="custom-navbar">
+        <header style="background-color: #F1E5CD;">
+            <div class="container d-flex justify-content-between align-items-center py-2">
+                <a th:href="@{/}" title="Home">
+                    <img th:src="@{/imgs/logo.png}" alt="logo" class="logo" height="50">
+                </a>
+
+                <form role="search" th:action="@{/pizzas/search}" method="get">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Che pizza cerchi?"
+                        aria-label="Search" />
+                </form>
+
+                <div class="d-flex align-items-center gap-2">
+                    <a title="Elenco pizze" class="btn btn-primary" th:href="@{/pizzas}"><i
+                            class="fa-solid fa-bars"></i></a>
+
+                    <a title="Elenco Ingredienti" class="btn btn-primary" th:href="@{/ingredients}"><i
+                            class="fa-solid fa-book"></i></a>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+    <th:block th:fragment="styles">
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.5/css/bootstrap.min.css}">
+        <link th:rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <title>La mia pizzeria</title>
+    </th:block>
+
+    <th:block th:fragment="empty-pizzas">
+        <div class="alert alert-warning text-center mt-2">
+            Nessuna pizza trovata
+        </div>
+    </th:block>
+
+    <th:block th:fragment="scripts">
+        <script th:src="@{/webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js}"></script>
+    </th:block>
+</body>
+
+</html>

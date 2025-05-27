@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+<th:block th:replace="~{fragments :: custom-navbar}"></th:block>
+
+<body>
+    <div class="container">
+        <h1 class="text-center"> [[${pizza.name}]]</h1>
+        <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+                <img th:src="@{${pizza.photo} != null ? '/imgs/' + ${pizza.photo} : '/imgs/placeholder.png'}"
+                    class="card-img-top" alt="..." />
+            </div>
+            <div class="col-6">
+                <p th:text="${pizza.description}"></p>
+                <p>Prezzo: €[[${pizza.price}]]</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

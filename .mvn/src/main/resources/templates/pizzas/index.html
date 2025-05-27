@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments :: styles}"></th:block>
+</head>
+<th:block th:replace="~{fragments :: custom-navbar}"></th:block>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <th:block th:if="${!pizzas.isEmpty()}">
+
+                <h1>L'elenco delle nostre pizze</h1>
+                <th:block th:each="pizza : ${pizzas}" th:object="${pizza}">
+                    <div class="col-3 p-2">
+                        <div class="card p-2 h-100">
+                            <img th:src="@{${pizza.photo} != null ? '/imgs/' + ${pizza.photo} : '/imgs/placeholder.png'}"
+                                class="card-img-top fixed-img" alt="..." />
+                            <div class="card-body p-0 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5 class="card-title" th:text="*{name}"></h5>
+                                    <p class="card-text">[[*{description}]]</p>
+                                </div>
+                                <div>
+                                    <p class="card-text">€ [[*{price}]]</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="btn btn-primary">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+
+                                        <div class="d-flex justify-content-between align-items-center gap-2">
+                                            <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-primary">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                th:data-bs-target="'#modal'+${pizza.id}">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+
+                                        </div>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" th:id="'modal'+${pizza.id}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Elimino pizza [[${pizza.name}]]</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Sei sicuro?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Annulla</button>
+                                                        <form th:action="@{/pizzas/delete/{id}(id=${pizza.id})}"
+                                                            method="post">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                Elimina
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+
+        <div th:if="${pizzas.isEmpty()}">
+            <th:block th:replace="~{fragments :: empty-pizzas}"></th:block>
+        </div>
+    </div>
+    </div>
+
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+
+</html>

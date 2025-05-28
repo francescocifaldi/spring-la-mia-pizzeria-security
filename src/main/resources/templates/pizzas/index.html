@@ -11,7 +11,8 @@
 <body>
     <div class="container">
         <div class="row">
-            <a title="Crea pizza" class="btn btn-outline-primary my-2" th:href="@{/pizzas/create}">Crea una nuova
+            <a title="Crea pizza" class="btn btn-outline-primary my-2" th:href="@{/pizzas/create}"
+                sec:authorize="hasAuthority('ADMIN')">Crea una nuova
                 pizza</a>
             <th:block th:if="${!pizzas.isEmpty()}">
 
@@ -36,15 +37,16 @@
 
                                         <div class="d-flex justify-content-between align-items-center gap-2">
                                             <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-primary"
-                                                title="Modifica">
+                                                title="Modifica" sec:authorize="hasAuthority('ADMIN')">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                             <a th:href="@{/pizzas/{id}/deal(id=${pizza.id})}" class="btn btn-primary"
-                                                title="Crea offerta">
+                                                title="Crea offerta" sec:authorize="hasAuthority('ADMIN')">
                                                 <i class="fa-solid fa-tag"></i>
                                             </a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                th:data-bs-target="'#modal'+${pizza.id}" title="Elimina">
+                                                th:data-bs-target="'#modal'+${pizza.id}" title="Elimina"
+                                                sec:authorize="hasAuthority('ADMIN')">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </button>
                                         </div>

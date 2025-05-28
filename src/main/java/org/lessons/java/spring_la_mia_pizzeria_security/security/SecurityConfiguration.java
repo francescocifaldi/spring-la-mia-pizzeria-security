@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/pizzas/create", "/pizzas/edit/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAuthority("ADMIN")
                 .requestMatchers("/ingredients", "/ingredients/**").hasAuthority("ADMIN")
-                .requestMatchers("/books", "/books/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout()
@@ -30,6 +30,7 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    @Bean
     @SuppressWarnings("deprecation")
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
